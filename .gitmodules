@@ -1,0 +1,3 @@
+[submodule "udmabuf"]
+	path = u-dma-buf
+	url = https://github.com/ikwzm/udmabuf.git

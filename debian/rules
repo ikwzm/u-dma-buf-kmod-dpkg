@@ -1,0 +1,42 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+package         = u-dma-buf
+kernel_release ?= $(shell uname -r)
+arch           ?= $(shell uname -m | sed -e s/arm.*/arm/ -e s/aarch64.*/arm64/)
+deb_arch       ?= $(shell dpkg --print-architecture)
+kernel_src_dir ?= /lib/modules/$(kernel_release)/build
+docdir          = debian/tmp/usr/share/doc/$(package)-$(kernel_release)
+
+clean:
+	rm -f build
+	-$(MAKE) clean
+	rm -rf debian/tmp debian/control debian/*~ debian/files* debian/substvars
+
+build:
+	$(MAKE) all
+	touch build
+
+binary-indep: build
+
+control: debian/control.template
+	sed -e "s/\$${KERNEL_RELEASE}/${kernel_release}/g" debian/control.template > debian/control
+
+binary-arch: control build
+	rm -rf debian/tmp
+	install -d debian/tmp/DEBIAN $(docdir)
+	$(MAKE) prefix=$(CURDIR)/debian/tmp arch=$(arch) kernel_release=$(kernel_release) kernel_src_dir=$(kernel_src_dir) install
+	cp -a debian/copyright      $(docdir)
+	cp -a debian/changelog      $(docdir)/changelog.Debian
+	cp -a ChangeLog             $(docdir)/changelog
+	cd $(docdir) && gzip -9 changelog changelog.Debian
+	dpkg-gencontrol -DArchitecture=$(deb_arch)
+	cp -a debian/postinst       debian/tmp/DEBIAN
+	cp -a debian/prerm          debian/tmp/DEBIAN
+	cp -a debian/postrm         debian/tmp/DEBIAN
+	chown -R root:root debian/tmp
+	chmod -$ u+w,go=rX debian/tmp
+	dpkg-deb --build debian/tmp ..
+
+binary: binary-indep binary-arch
+
