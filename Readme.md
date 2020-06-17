@@ -20,7 +20,7 @@ Build Debian Package
 ### Download repository
 
 ```console
-shell$ git clone --recursive --depth=1 -b v3.0.0 git://github.com/ikwzm/u-dma-buf-kmod-dpkg
+shell$ git clone --recursive --depth=1 -b v3.0.1 git://github.com/ikwzm/u-dma-buf-kmod-dpkg
 shell$ cd u-dma-buf-kmod-dpkg
 ```
 
