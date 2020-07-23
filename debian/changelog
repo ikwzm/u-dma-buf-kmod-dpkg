@@ -1,3 +1,9 @@
+u-dma-buf (3.2.1-0) unstable; urgency=low
+
+  * Update to u-dma-buf 3.2.1
+
+ -- ikwzm <ichiro_k@ca2.so-net.ne.jp>  Fri, 24 Jul 2020 06:18:00 +0900
+
 u-dma-buf (3.2.0-0) unstable; urgency=low
 
   * Update to u-dma-buf 3.2.0
