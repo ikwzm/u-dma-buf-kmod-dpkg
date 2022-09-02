@@ -5,17 +5,22 @@ arch           ?= $(shell uname -m | sed -e s/arm.*/arm/ -e s/aarch64.*/arm64/)
 lib_dir        ?= $(prefix)/lib/modules/$(kernel_release)/ikwzm
 kernel_src_dir ?= /lib/modules/$(kernel_release)/build
 
-kmod_objects   += u-dma-buf/u-dma-buf.ko
+config_list    ?= CONFIG_U_DMA_BUF_MGR=m
 
 .PHONY: all install
 
 all:
-	cd ./u-dma-buf ; $(MAKE) ARCH=$(arch) KERNEL_SRC_DIR=$(kernel_src_dir) all   ; cd $(curr_dir)
+	cd ./u-dma-buf ; $(MAKE) ARCH=$(arch) KERNEL_SRC_DIR=$(kernel_src_dir) $(config_list) all   ; cd $(curr_dir)
 
 clean:
-	cd ./u-dma-buf ; $(MAKE) ARCH=$(arch) KERNEL_SRC_DIR=$(kernel_src_dir) clean ; cd $(curr_dir)
+	cd ./u-dma-buf ; $(MAKE) ARCH=$(arch) KERNEL_SRC_DIR=$(kernel_src_dir) $(config_list) clean ; cd $(curr_dir)
 
-install: all
+install-u-dma-buf: all
 	install -d $(lib_dir)
-	for ko in $(kmod_objects); do install -m 0644 $$ko $(lib_dir) ; done
+	install -m 0644 u-dma-buf/u-dma-buf.ko $(lib_dir)
 
+install-u-dma-buf-mgr: all
+	install -d $(lib_dir)
+	install -m 0644 u-dma-buf/u-dma-buf-mgr.ko $(lib_dir)
+
+install: install-u-dma-buf install-u-dma-buf-mgr
