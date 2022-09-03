@@ -20,7 +20,7 @@ Build Debian Package
 ### Download repository
 
 ```console
-shell$ git clone --recursive --depth=1 -b v3.2.3 git://github.com/ikwzm/u-dma-buf-kmod-dpkg
+shell$ git clone --recursive --depth=1 -b v4.0.0 git://github.com/ikwzm/u-dma-buf-kmod-dpkg
 shell$ cd u-dma-buf-kmod-dpkg
 ```
 
@@ -37,12 +37,14 @@ shell$ cd u-dma-buf-kmod-dpkg
 
 
 ```console
-shell$ sudo debian/rules arch=arm deb_arch=armhf kernel_release=5.4.47-armv7-fpga kernel_src_dir=/usr/src/linux-5.4.47-armv7-fpga binary
+shell$ sudo debian/rules arch=arm deb_arch=armhf kernel_release=5.10.109-armv7-fpga kernel_src_dir=/usr/src/linux-5.10.109-armv7-fpga binary
     :
     :
     :
-shell$ file ../u-dma-buf-5.4.47-armv7-fpga_3.2.3-1_armhf.deb
-../u-dma-buf-5.4.47-armv7-fpga_3.2.3-1_armhf.deb: Debian binary package (format 2.0)
+shell$ file ../u-dma-buf-5.10.109-armv7-fpga_4.0.0-0_armhf.deb 
+../u-dma-buf-5.10.109-armv7-fpga_4.0.0-0_armhf.deb: Debian binary package (format 2.0)
+shell$ file ../u-dma-buf-mgr-5.10.109-armv7-fpga_4.0.0-0_armhf.deb 
+../u-dma-buf-mgr-5.10.109-armv7-fpga_4.0.0-0_armhf.deb: Debian binary package (format 2.0)
 ```
 
 ### Self Compile
@@ -52,7 +54,9 @@ shell$ sudo debian/rules binary
     :
     :
     :
-shell$ file ../u-dma-buf-5.4.47-armv7-fpga_3.2.3-1_armhf.deb
-../u-dma-buf-5.4.47-armv7-fpga_3.2.3-1_armhf.deb: Debian binary package (format 2.0)
+shell$ file ../u-dma-buf-5.10.109-armv7-fpga_4.0.0-0_armhf.deb 
+../u-dma-buf-5.10.109-armv7-fpga_4.0.0-0_armhf.deb: Debian binary package (format 2.0)
+shell$ file ../u-dma-buf-mgr-5.10.109-armv7-fpga_4.0.0-0_armhf.deb 
+../u-dma-buf-mgr-5.10.109-armv7-fpga_4.0.0-0_armhf.deb: Debian binary package (format 2.0)
 ```
 
