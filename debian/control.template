@@ -11,10 +11,3 @@ Architecture: any
 Provides: u-dma-buf-kernel-module
 Depends: ${shlibs:Depends}, ${misc:Depends}, linux-image-${KERNEL_RELEASE}
 Description: u-dma-buf(User space mappable DMA Buffer) Device Driver.
-
-Package: u-dma-buf-mgr-${KERNEL_RELEASE}
-Architecture: any
-Provides: u-dma-buf-kernel-module
-Depends: ${shlibs:Depends}, ${misc:Depends}, linux-image-${KERNEL_RELEASE}, u-dma-buf-${KERNEL_RELEASE}
-Description: u-dma-buf(User space mappable DMA Buffer)  Managere Device Driver.
-

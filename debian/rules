@@ -1,11 +1,12 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
 
-package_list    = u-dma-buf u-dma-buf-mgr
+package        = u-dma-buf
 kernel_release ?= $(shell uname -r)
 arch           ?= $(shell uname -m | sed -e s/arm.*/arm/ -e s/aarch64.*/arm64/)
 deb_arch       ?= $(shell dpkg --print-architecture)
 kernel_src_dir ?= /lib/modules/$(kernel_release)/build
+doc_dir         = debian/tmp/usr/share/doc/$(package)-$(kernel_release)
 
 clean:
 	rm -f build
@@ -21,34 +22,22 @@ binary-indep: build
 control: debian/control.template
 	sed -e "s/\$${KERNEL_RELEASE}/${kernel_release}/g" debian/control.template > debian/control
 
-
-binary-arch: control build $(package_list)
-
 binary: binary-indep binary-arch
 
-define PACKAGE_RELEASE_NAME
-$(addsuffix -${kernel_release},$(1))
-endef
+binary-arch: control build
+	rm     -rf debian/tmp
+	install -d debian/tmp/DEBIAN 
+	install -d $(doc_dir)
+	$(MAKE) prefix=$(CURDIR)/debian/tmp arch=$(arch) kernel_release=$(kernel_release) kernel_src_dir=$(kernel_src_dir) install
+	cp -a debian/copyright  $(doc_dir)
+	cp -a debian/changelog  $(doc_dir)/changelog.Debian
+	cp -a ChangeLog         $(doc_dir)/changelog
+	cd $(doc_dir) && gzip -9 changelog changelog.Debian
+	dpkg-gencontrol -DArchitecture=$(deb_arch)
+	cp -a debian/postinst   debian/tmp/DEBIAN 
+	cp -a debian/prerm      debian/tmp/DEBIAN 
+	cp -a debian/postrm     debian/tmp/DEBIAN 
+	chown -R root:root      debian/tmp/DEBIAN 
+	chmod u+w,go=rX         debian/tmp/DEBIAN
+	dpkg-deb --build debian/tmp ..
 
-define PACKAGE_BINARY
-$(1) : control build
-	rm     -rf debian/tmp/$(2)
-	install -d debian/tmp/$(2)/DEBIAN 
-	install -d debian/tmp/$(2)/usr/share/doc/$(2)
-	$(MAKE) prefix=$(CURDIR)/debian/tmp/$(2) arch=$(arch) kernel_release=$(kernel_release) kernel_src_dir=$(kernel_src_dir) install-$(1)
-	cp -a debian/copyright  debian/tmp/$(2)/usr/share/doc/$(2)
-	cp -a debian/changelog  debian/tmp/$(2)/usr/share/doc/$(2)/changelog.Debian
-	cp -a ChangeLog         debian/tmp/$(2)/usr/share/doc/$(2)/changelog
-	cd debian/tmp/$(2)/usr/share/doc/$(2)/ && gzip -9 changelog changelog.Debian
-	dpkg-gencontrol -DArchitecture=$(deb_arch) -p$(2) -Pdebian/tmp/$(2)
-	cp -a debian/postinst   debian/tmp/$(2)/DEBIAN 
-	cp -a debian/prerm      debian/tmp/$(2)/DEBIAN 
-	cp -a debian/postrm     debian/tmp/$(2)/DEBIAN 
-	chown -R root:root      debian/tmp/$(2)/DEBIAN 
-	chmod u+w,go=rX         debian/tmp/$(2)/DEBIAN
-	dpkg-deb --build debian/tmp/$(2) ..
-endef
-
-$(foreach package,$(package_list),\
-    $(eval $(call PACKAGE_BINARY,$(package),$(call PACKAGE_RELEASE_NAME,$(package))))\
-)

@@ -17,12 +17,7 @@ clean:
 	cd ./u-dma-buf     ; $(MAKE) ARCH=$(arch) KERNEL_SRC_DIR=$(kernel_src_dir)                   clean ; cd $(curr_dir)
 	cd ./u-dma-buf-mgr ; $(MAKE) ARCH=$(arch) KERNEL_SRC_DIR=$(kernel_src_dir) $(module_symvers) clean ; cd $(curr_dir)
 
-install-u-dma-buf: all
+install:
 	install -d $(lib_dir)
 	install -m 0644 u-dma-buf/u-dma-buf.ko $(lib_dir)
-
-install-u-dma-buf-mgr: all
-	install -d $(lib_dir)
 	install -m 0644 u-dma-buf-mgr/u-dma-buf-mgr.ko $(lib_dir)
-
-install: install-u-dma-buf install-u-dma-buf-mgr
