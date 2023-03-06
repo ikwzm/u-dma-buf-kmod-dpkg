@@ -1,9 +1,9 @@
-u-dma-buf (4.3.0-rc2) unstable; urgency=low
+u-dma-buf (4.3.0-rc3) unstable; urgency=low
 
-  * Update to u-dma-buf     4.3.0-rc2
-  * Update to u-dma-buf-mbr 4.3.0-rc1
+  * Update to u-dma-buf     4.3.0-rc3
+  * Update to u-dma-buf-mbr 4.3.0-rc3
 
- -- ikwzm <ichiro_k@ca2.so-net.ne.jp>  Mon,  6 Mar 2023 07:00:00 +0900
+ -- ikwzm <ichiro_k@ca2.so-net.ne.jp>  Mon,  6 Mar 2023 15:45:00 +0900
 
 u-dma-buf (4.2.0-0) unstable; urgency=low
 
