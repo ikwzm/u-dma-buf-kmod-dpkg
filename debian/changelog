@@ -1,7 +1,7 @@
-u-dma-buf (4.3.0-rc3) unstable; urgency=low
+u-dma-buf (4.3.0-rc4) unstable; urgency=low
 
-  * Update to u-dma-buf     4.3.0-rc3
-  * Update to u-dma-buf-mbr 4.3.0-rc3
+  * Update to u-dma-buf     4.3.0-rc4
+  * Update to u-dma-buf-mbr 4.3.0-rc4
 
  -- ikwzm <ichiro_k@ca2.so-net.ne.jp>  Mon,  6 Mar 2023 15:45:00 +0900
 
