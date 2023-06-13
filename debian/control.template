@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: ikwzm <ichiro_k@ca2.so-net.ne.jp>
 Build-Depends: debhelper (>= 9), bzip2
 Standards-Version: 3.9.6
-Homepage: <https://github.com/ikwzm/udmabuf>
+Homepage: <https://github.com/ikwzm/u-dma-buf-kmod-dpkg>
 
 Package: u-dma-buf-${KERNEL_RELEASE}
 Architecture: any
