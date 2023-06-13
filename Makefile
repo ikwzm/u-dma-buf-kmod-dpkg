@@ -5,7 +5,7 @@ arch           ?= $(shell uname -m | sed -e s/arm.*/arm/ -e s/aarch64.*/arm64/)
 lib_dir        ?= $(prefix)/lib/modules/$(kernel_release)/ikwzm
 kernel_src_dir ?= /lib/modules/$(kernel_release)/build
 
-module_symvers ?= U_DMA_BUF_SYMVERS=$(curr_dir)/u-dma-buf/Module.symvers
+module_symvers ?= KBUILD_EXTRA_SYMBOLS=$(curr_dir)/u-dma-buf/Module.symvers
 
 .PHONY: all install
 
