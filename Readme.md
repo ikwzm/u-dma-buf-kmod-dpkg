@@ -20,7 +20,7 @@ Build Debian Package
 ### Download repository
 
 ```console
-shell$ git clone --recursive --depth=1 -b v4.5.0 git://github.com/ikwzm/u-dma-buf-kmod-dpkg
+shell$ git clone --recursive --depth=1 -b v4.5.0-1 git://github.com/ikwzm/u-dma-buf-kmod-dpkg
 shell$ cd u-dma-buf-kmod-dpkg
 ```
 
@@ -28,13 +28,13 @@ shell$ cd u-dma-buf-kmod-dpkg
 
 #### Parameters
 
-| Parameter Name | Description              | Default Value                                                    |
-|----------------|--------------------------|------------------------------------------------------------------|
-| kernel_release | Kernel Release Name      | $(shell uname -r)                                                |
-| arch           | Architecture Name        | $(shell uname -m \| sed -e s/arm.\*/arm/ -e s/aarch64.\*/arm64/) |
-| deb_arch       | Debian Architecture Name | $(shell dpkg --print-architecture)                               |
-| kernel_src_dir | Kernel Source Directory  | /lib/modules/$(kernel_release)/build                             |
-
+| Parameter Name | Description                 | Default Value                                                    |
+|----------------|-----------------------------|------------------------------------------------------------------|
+| kernel_release | Kernel Release Name         | $(shell uname -r)                                                |
+| arch           | Architecture Name           | $(shell uname -m \| sed -e s/arm.\*/arm/ -e s/aarch64.\*/arm64/) |
+| deb_arch       | Debian Architecture Name    | $(shell dpkg --print-architecture)                               |
+| kernel_src_dir | Kernel Source Directory     | /lib/modules/$(kernel_release)/build                             |
+| kernel_package | Kernel Image Debian Package | linux-image-$(kernel_release)                                    |
 
 ```console
 shell$ sudo debian/rules arch=arm deb_arch=armhf kernel_release=6.1.33-armv7-fpga kernel_src_dir=/usr/src/linux-6.1.33-armv7-fpga binary
@@ -56,3 +56,14 @@ shell$ file ../u-dma-buf-6.1.33-armv7-fpga_4.5.0-0_armhf.deb
 ../u-dma-buf-6.1.33-armv7-fpga_4.5.0-0_armhf.deb: Debian binary package (format 2.0)
 ```
 
+### Self Compile on Raspberry Pi
+
+```console
+shell$ sudo apt install raspberrypi-kernel-headers
+shell$ sudo debian/rules kernel_package=raspberrypi-kernel binary
+    :
+    :
+    :
+shell$ file ../u-dma-buf-6.1.21-v8+_4.5.0-1_arm64.deb
+../u-dma-buf-6.1.21-v8+_4.5.0-1_arm64.deb: Debian binary package (format 2.0), with control.tar.xz, data compression xz
+```

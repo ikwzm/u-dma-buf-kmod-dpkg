@@ -9,5 +9,5 @@ Homepage: <https://github.com/ikwzm/u-dma-buf-kmod-dpkg>
 Package: u-dma-buf-${KERNEL_RELEASE}
 Architecture: any
 Provides: u-dma-buf-kernel-module
-Depends: ${shlibs:Depends}, ${misc:Depends}, linux-image-${KERNEL_RELEASE}
+Depends: ${shlibs:Depends}, ${misc:Depends}, ${KERNEL_IMAGE_PACKAGE}
 Description: u-dma-buf(User space mappable DMA Buffer) Device Driver.
