@@ -1,3 +1,9 @@
+u-dma-buf (4.5.0-1) unstable; urgency=low
+
+  * Added kernel_package variable to debian/rules to build for raspberry-pi
+
+ -- ikwzm <ichiro_k@ca2.so-net.ne.jp>  Thu, 17 Aug 2023 13:40:00 +0900
+
 u-dma-buf (4.5.0-0) unstable; urgency=low
 
   * Update to u-dma-buf     4.5.0

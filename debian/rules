@@ -6,6 +6,7 @@ kernel_release ?= $(shell uname -r)
 arch           ?= $(shell uname -m | sed -e s/arm.*/arm/ -e s/aarch64.*/arm64/)
 deb_arch       ?= $(shell dpkg --print-architecture)
 kernel_src_dir ?= /lib/modules/$(kernel_release)/build
+kernel_package ?= linux-image-$(kernel_release)
 doc_dir         = debian/tmp/usr/share/doc/$(package)-$(kernel_release)
 
 clean:
@@ -20,7 +21,9 @@ build:
 binary-indep: build
 
 control: debian/control.template
-	sed -e "s/\$${KERNEL_RELEASE}/${kernel_release}/g" debian/control.template > debian/control
+	sed -e "s/\$${KERNEL_RELEASE}/${kernel_release}/g" \
+	    -e "s/\$${KERNEL_IMAGE_PACKAGE}/${kernel_package}/g" \
+	    debian/control.template > debian/control
 
 binary: binary-indep binary-arch
 
