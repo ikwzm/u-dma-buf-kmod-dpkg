@@ -1,3 +1,10 @@
+u-dma-buf (4.7.2-0) unstable; urgency=low
+
+  * Update to u-dma-buf     4.7.2
+  * Update to u-dma-buf-mgr 4.6.1
+
+ -- ikwzm <ichiro_k@ca2.so-net.ne.jp>  Tue, 8 Oct 2024 14:05:00 +0900
+
 u-dma-buf (4.7.1-0) unstable; urgency=low
 
   * Update to u-dma-buf     4.7.1
