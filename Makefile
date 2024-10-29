@@ -5,16 +5,17 @@ arch           ?= $(shell uname -m | sed -e s/arm.*/arm/ -e s/aarch64.*/arm64/)
 lib_dir        ?= $(prefix)/lib/modules/$(kernel_release)/ikwzm
 kernel_src_dir ?= /lib/modules/$(kernel_release)/build
 
+config_udmabuf += CONFIG_U_DMA_BUF_IN_KERNEL_FUNCTIONS=y
 module_symvers ?= KBUILD_EXTRA_SYMBOLS=$(curr_dir)/u-dma-buf/Module.symvers
 
 .PHONY: all install
 
 all:
-	cd ./u-dma-buf     ; $(MAKE) ARCH=$(arch) KERNEL_SRC_DIR=$(kernel_src_dir)                   all   ; cd $(curr_dir)
+	cd ./u-dma-buf     ; $(MAKE) ARCH=$(arch) KERNEL_SRC_DIR=$(kernel_src_dir) $(config_udmabuf) all   ; cd $(curr_dir)
 	cd ./u-dma-buf-mgr ; $(MAKE) ARCH=$(arch) KERNEL_SRC_DIR=$(kernel_src_dir) $(module_symvers) all   ; cd $(curr_dir)
 
 clean:
-	cd ./u-dma-buf     ; $(MAKE) ARCH=$(arch) KERNEL_SRC_DIR=$(kernel_src_dir)                   clean ; cd $(curr_dir)
+	cd ./u-dma-buf     ; $(MAKE) ARCH=$(arch) KERNEL_SRC_DIR=$(kernel_src_dir) $(config_udmabuf) clean ; cd $(curr_dir)
 	cd ./u-dma-buf-mgr ; $(MAKE) ARCH=$(arch) KERNEL_SRC_DIR=$(kernel_src_dir) $(module_symvers) clean ; cd $(curr_dir)
 
 install:
