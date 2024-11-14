@@ -1,3 +1,10 @@
+u-dma-buf (5.0.2-0) unstable; urgency=low
+
+  * Update to u-dma-buf     5.0.2
+  * Update to u-dma-buf-mgr 4.6.1
+
+ -- ikwzm <ichiro_k@ca2.so-net.ne.jp>  Fri, 15 Nov 2024 08:30:00 +0900
+
 u-dma-buf (5.0.1-0) unstable; urgency=low
 
   * Update to u-dma-buf     5.0.1
