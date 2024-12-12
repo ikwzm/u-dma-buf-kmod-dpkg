@@ -20,7 +20,7 @@ Build Debian Package
 ### Download repository
 
 ```console
-shell$ git clone --recursive --depth=1 -b v5.0.2 https://github.com/ikwzm/u-dma-buf-kmod-dpkg
+shell$ git clone --recursive --depth=1 -b v5.0.3 https://github.com/ikwzm/u-dma-buf-kmod-dpkg
 shell$ cd u-dma-buf-kmod-dpkg
 ```
 
@@ -31,7 +31,7 @@ shell$ cd u-dma-buf-kmod-dpkg
 | Parameter Name | Description                 | Default Value                                                    |
 |----------------|-----------------------------|------------------------------------------------------------------|
 | kernel_release | Kernel Release Name         | $(shell uname -r)                                                |
-| arch           | Architecture Name           | $(shell uname -m \| sed -e s/arm.\*/arm/ -e s/aarch64.\*/arm64/) |
+| arch           | Architecture Name           | $(shell uname -m \| sed -e s/arm.\*/arm/ -e s/aarch64.\*/arm64/ -e s/riscv.*/riscv/) |
 | deb_arch       | Debian Architecture Name    | $(shell dpkg --print-architecture)                               |
 | kernel_src_dir | Kernel Source Directory     | /lib/modules/$(kernel_release)/build                             |
 | kernel_package | Kernel Image Debian Package | linux-image-$(kernel_release)                                    |
@@ -41,8 +41,8 @@ shell$ sudo debian/rules arch=arm deb_arch=armhf kernel_release=6.1.33-armv7-fpg
     :
     :
     :
-shell$ file ../u-dma-buf-6.1.33-armv7-fpga_5.0.2-0_armhf.deb 
-../u-dma-buf-6.1.33-armv7-fpga_5.0.2-0_armhf.deb: Debian binary package (format 2.0), with control.tar.xz, data compression xz
+shell$ file ../u-dma-buf-6.1.33-armv7-fpga_5.0.3-0_armhf.deb 
+../u-dma-buf-6.1.33-armv7-fpga_5.0.3-0_armhf.deb: Debian binary package (format 2.0), with control.tar.xz, data compression xz
 ```
 
 ### Self Compile
@@ -52,8 +52,8 @@ shell$ sudo debian/rules binary
     :
     :
     :
-shell$ file ../u-dma-buf-6.1.33-armv7-fpga_5.0.2-0_armhf.deb 
-../u-dma-buf-6.1.33-armv7-fpga_5.0.2-0_armhf.deb: Debian binary package (format 2.0), with control.tar.zs, data compression zst
+shell$ file ../u-dma-buf-6.1.33-armv7-fpga_5.0.3-0_armhf.deb 
+../u-dma-buf-6.1.33-armv7-fpga_5.0.3-0_armhf.deb: Debian binary package (format 2.0), with control.tar.zs, data compression zst
 ```
 
 ### Self Compile on Raspberry Pi
@@ -64,6 +64,6 @@ shell$ sudo debian/rules kernel_package=raspberrypi-kernel binary
     :
     :
     :
-shell$ file ../u-dma-buf-6.1.21-v8+_5.0.2-0_arm64.deb
-../u-dma-buf-6.1.21-v8+_5.0.2-0_arm64.deb: Debian binary package (format 2.0), with control.tar.zs, data compression zst
+shell$ file ../u-dma-buf-6.1.21-v8+_5.0.3-0_arm64.deb
+../u-dma-buf-6.1.21-v8+_5.0.3-0_arm64.deb: Debian binary package (format 2.0), with control.tar.zs, data compression zst
 ```
